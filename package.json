@@ -1,0 +1,22 @@
+{
+  "name": "flexpad",
+  "version": "0.0.0",
+  "description": "A flexbox system",
+  "main": "flexpad.css",
+  "scripts": {
+    "start": "python -m SimpleHTTPServer",
+    "build": "node build.js",
+    "dev": "./node_modules/.bin/nodemon ./build.js --watch .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "flexbox",
+    "grid",
+    "layout"
+  ],
+  "author": "David Hérault",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}

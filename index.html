@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+    <link rel="stylesheet" href="/flexpad.css">
+    <link rel="stylesheet" href="/flexpad/flexpad.css">
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: sans-serif;
+        font-size: 20px;
+        min-height: 100vh;
+      }
+      h1 {
+        margin: 40px 0 40px 0;
+      }
+      nav {
+        width: 660px;
+      }
+      article {
+        width: calc((44 * 4 + 40) * 3px);
+        margin-top: 20px;
+      }
+      section {
+        display: block;
+        margin: 5px 15px 0 15px;
+      }
+      section > label {
+        display: block;
+        width: 100%;
+        font-size: 24px;
+        font-weight: bold;
+        font-family: monospace;
+        text-align: center;
+      }
+      nav > label {
+        font-family: monospace;
+        text-align: center;
+      }
+      button {
+        cursor: pointer;
+        min-width: 50px;
+        min-height: 50px;
+        background-color: white;
+        padding: 10px;
+        border: 2px solid DarkGrey;
+        margin: 0px 5px;
+        font-family: monospace;
+        color: DarkGrey;
+      }
+      button:focus, input:focus {
+        outline: none;
+      }
+      .button-active {
+        font-weight: bold;
+        background-color: DarkGrey;
+        color: black;
+      }
+      .buttons {
+        padding: 0;
+        width: 54px;
+        max-width: 60px;
+        min-height: : 60px;
+        border: 2px solid DarkGrey;
+      }
+      .separator {
+        width: 2px;
+        background-color: DarkGrey;
+        height: 46px;
+        margin: 0 5px;
+      }
+      .buttons button, .zero {
+        padding: 0;
+        width: 25px;
+        height: 25px;
+        min-width: 25px;
+        min-height: 25px;
+        margin: 0;
+        border: none;
+        font-size: 16px;
+      }
+      .zero {
+        margin-top: 5px;
+        border: 2px solid DarkGrey;
+      }
+      .locked {
+        height: calc(4 * 43px);
+      }
+      .container {
+        width: calc(4 * 43px);
+        border: 2px solid DarkGrey;
+      }
+      .box {
+        min-width: 40px;
+        min-height: 40px;
+        margin: 1px;
+        border: 2px solid DarkGrey;
+        color: Darkgrey;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    </style>
+
+    <title>Flexpad</title>
+
+  </head>
+  <body class="y8">
+
+    <h1>Flexpad</h1>
+
+    <nav class="x57b">
+
+      <div class="x47">
+        <button class="button-active">x</button>
+        <button>y</button>
+        <div class="separator"></div>
+        <button>a</button>
+        <button>b</button>
+        <div class="separator"></div>
+        <button>s</button>
+      </div>
+
+      <div class="y8">
+        <div class="x57 buttons">
+          <button>⌜</button>
+          <button>⌝</button>
+          <button>⌞</button>
+          <button>⌟</button>
+        </div>
+
+        <button class="zero">0</button>
+      </div>
+
+      <input type="range" min="1" max="20" value="3" />
+      <button>🔓</button>
+
+    </nav>
+
+    <article class="x57">
+
+      <section id="7">
+        <label></label>
+        <div></div>
+      </section>
+      <section id="8">
+        <label></label>
+        <div></div>
+      </section>
+      <section id="9">
+        <label></label>
+        <div></div>
+      </section>
+      <section id="4">
+        <label></label>
+        <div></div>
+      </section>
+      <section id="5">
+        <label></label>
+        <div></div>
+      </section>
+      <section id="6">
+        <label></label>
+        <div></div>
+      </section>
+      <section id="1">
+        <label></label>
+        <div></div>
+      </section>
+      <section id="2">
+        <label></label>
+        <div></div>
+      </section>
+      <section id="3">
+        <label></label>
+        <div></div>
+      </section>
+
+    </article>
+
+    <script>
+      const [bX, bY, bA, bB, bS, btl, btr, bbl, bbr, br, bl] = document.getElementsByTagName('button')
+      const [slider] = document.getElementsByTagName('input')
+
+      const sections = []
+      for (let i = 1; i < 10; i++) sections.push(document.getElementById(i))
+
+      const traverseSections = fn => {
+        for (let i = 1; i < 10; i++) fn(document.getElementById(i), i)
+      }
+
+      const activateButton = (el, bool) => el.classList[bool ? 'add' : 'remove']('button-active')
+
+      const dToI = d => ({ tl: 7, tr: 9, bl: 1, br: 3, r: '0' })[d]
+
+      const state = {
+        x: true,
+        n: 3,
+        locked: true,
+      }
+
+      function render() {
+        const { x, a, b, s, d, locked } = state
+
+        traverseSections((section, i) => {
+          let className = `${x ? 'x' : 'y'}${i}${dToI(d) || ''}`
+
+          if (a) className += 'a'
+          if (b) className += 'b'
+          if (s) className += 's'
+
+          section.children[0].innerText = '.' + className
+          section.children[1].className = `${className}${locked ? ' locked' : ''} container`
+        })
+
+        activateButton(bX, x)
+        activateButton(bY, !x)
+        activateButton(bA, a)
+        activateButton(bB, b)
+        activateButton(bS, s)
+        activateButton(btl, d === 'tl')
+        activateButton(btr, d === 'tr')
+        activateButton(bbl, d === 'bl')
+        activateButton(bbr, d === 'br')
+        activateButton(br, d === 'r')
+        activateButton(bl, !locked)
+      }
+
+      const onclick = ((el, fn) => el.onclick = () => fn() + '' && render())
+
+      onclick(bX, () => state.x = true)
+      onclick(bY, () => state.x = false)
+      onclick(bA, () => (state.a = !state.a) + '' && (state.b = false))
+      onclick(bB, () => (state.b = !state.b) + '' && (state.a = false))
+      onclick(bS, () => state.s = !state.s)
+      onclick(btl, () => state.d = state.d !== 'tl' && 'tl')
+      onclick(btr, () => state.d = state.d !== 'tr' && 'tr')
+      onclick(bbl, () => state.d = state.d !== 'bl' && 'bl')
+      onclick(bbr, () => state.d = state.d !== 'br' && 'br')
+      onclick(br, () => state.d = state.d !== 'r' && 'r')
+      onclick(bl, () => state.locked = !state.locked)
+
+      function renderBoxes() {
+        const { n } = state
+
+        traverseSections(section => {
+          const container = section.children[1]
+
+          while (container.hasChildNodes()) {
+            container.removeChild(container.lastChild)
+          }
+
+          for (let i = 0; i < n; i++) {
+            const box = document.createElement('div')
+
+            box.innerText = i + 1
+            box.className = 'x5 box'
+            container.appendChild(box)
+          }
+        })
+      };
+
+      function handleBoxNumberChange(e) {
+        const n = e.target.value
+
+        if (state.n === n) return
+
+        state.n = n
+
+        renderBoxes()
+      }
+
+      slider.oninput = handleBoxNumberChange
+      slider.onchange = handleBoxNumberChange
+
+      renderBoxes()
+      render()
+    </script>
+  </body>
+</html>
