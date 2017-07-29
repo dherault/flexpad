@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
     <link rel="stylesheet" href="/flexpad.css">
     <link rel="stylesheet" href="/flexpad/flexpad.css">
@@ -43,6 +44,8 @@
         flex-grow: 1;
       }
       section {
+        min-width: 144px;
+        min-height: 174px;
         display: block;
         margin: 5px 15px 0 15px;
       }
@@ -53,7 +56,7 @@
         font-weight: bold;
         font-family: monospace;
         text-align: center;
-        color: GoldenRod;
+        color: rgba(218, 165, 32, 0.75);
       }
       input {
         min-width: 180px;
@@ -121,23 +124,24 @@
       }
       .container {
         margin-top: 3px;
-        padding: 1px;
-        background-color: rgba(238, 238, 238, 0.25);
-        border: 2px solid rgba(238, 238, 238, 0.30);
+        /*padding: 1px;*/
+        background-color: rgba(238, 238, 238, 0.33);
+        /*border: 2px solid rgba(238, 238, 238, 0.30);*/
       }
       .y-locked {
-        height: 174px;
+        height: 144px;
       }
       .x-locked {
-        width: 174px;
+        width: 144px;
       }
       .box {
-        min-width: 40px;
-        min-height: 40px;
+        min-width: 34px;
+        min-height: 34px;
         margin: 1px;
         border: 2px solid SlateGray;
         font-size: 16px;
         font-weight: bold;
+        background-color: white;
       }
       .grow {
         flex-grow: 1;
@@ -164,7 +168,7 @@
       </div>
 
       <div class="y8">
-        <div id="wrap-origin" class="x57 buttons" title="wrap origin">
+        <div id="items-origin" class="x57 buttons" title="items origin">
           <button>⌜</button>
           <button>⌝</button>
           <button>⌞</button>
@@ -181,50 +185,58 @@
 
 
       <div class="y8">
-        <input type="range" min="1" max="20" value="3" title="number of children"/>
+        <input type="range" min="1" max="20" value="3" title="number of children" />
         <input type="range" min="1" max="5" value="4" title="children width" />
       </div>
 
     </nav>
 
-    <article class="x87">
+    <article class="y8">
 
-      <section id="7">
-        <label></label>
-        <div></div>
-      </section>
-      <section id="8">
-        <label></label>
-        <div></div>
-      </section>
-      <section id="9">
-        <label></label>
-        <div></div>
-      </section>
-      <section id="4">
-        <label></label>
-        <div></div>
-      </section>
-      <section id="5">
-        <label></label>
-        <div></div>
-      </section>
-      <section id="6">
-        <label></label>
-        <div></div>
-      </section>
-      <section id="1">
-        <label></label>
-        <div></div>
-      </section>
-      <section id="2">
-        <label></label>
-        <div></div>
-      </section>
-      <section id="3">
-        <label></label>
-        <div></div>
-      </section>
+      <div class="x5">
+        <section id="7">
+          <label></label>
+          <div></div>
+        </section>
+        <section id="8">
+          <label></label>
+          <div></div>
+        </section>
+        <section id="9">
+          <label></label>
+          <div></div>
+        </section>
+      </div>
+
+      <div class="x5">
+        <section id="4">
+          <label></label>
+          <div></div>
+        </section>
+        <section id="5">
+          <label></label>
+          <div></div>
+        </section>
+        <section id="6">
+          <label></label>
+          <div></div>
+        </section>
+      </div>
+
+      <div class="x5">
+        <section id="1">
+          <label></label>
+          <div></div>
+        </section>
+        <section id="2">
+          <label></label>
+          <div></div>
+        </section>
+        <section id="3">
+          <label></label>
+          <div></div>
+        </section>
+      </div>
 
     </article>
 
@@ -235,9 +247,9 @@
     </footer>
 
     <script>
-      const [bX, bY, bA, bB, bS, btl, btr, bbl, bbr, br, bLock, bGrow] = document.getElementsByTagName('button')
+      const [bX, bY, bA, bB, bS, b7, b9, b1, b3, b0, bLock, bGrow] = document.getElementsByTagName('button')
       const [sliderN, sliderR] = document.getElementsByTagName('input')
-      const divWrap = document.getElementById('wrap-origin');
+      const divWrap = document.getElementById('items-origin')
 
       const sections = []
       for (let i = 1; i < 10; i++) sections.push(document.getElementById(i))
@@ -247,14 +259,12 @@
       }
 
       const activateButton = (el, bool) => el.classList[bool ? 'add' : 'remove']('button-active')
-      const activateButtonLock = (bool, x) => bLock.classList[bool ? 'add' : 'remove']('lock-' + (x ? 'x' : 'y'));
-
-      const dToI = d => ({ tl: 7, tr: 9, bl: 1, br: 3, r: '0' })[d]
+      const activateButtonLock = (bool, x) => bLock.classList[bool ? 'add' : 'remove']('lock-' + (x ? 'x' : 'y'))
 
       const state = {
-        d: '',
-        x: true,
         n: 3,
+        x: true,
+        origin: -1,
         xLocked: true,
         yLocked: true,
         lockIndex: 0,
@@ -265,49 +275,54 @@
       }
 
       function render() {
-        const { x, a, b, s, d, grow, xLocked, yLocked } = state
+        // Ui as pure function of state
+        const { x, ab, s, origin, xLocked, yLocked } = state
 
+        // Assign selected classname to containers
         traverseSections((section, i) => {
-          let className = `${x ? 'x' : 'y'}${i}${dToI(d) || ''}`
+          let className = `${x ? 'x' : 'y'}${i}${origin >= 0 ? origin : ''}`
 
-          if (a) className += 'a'
-          if (b) className += 'b'
+          if (ab === 1) className += 'a'
+          else if (ab === 2) className += 'b'
           if (s) className += 's'
 
           section.children[0].innerText = className
           section.children[1].className = `${className}${xLocked ? ' x-locked' : ''}${yLocked ? ' y-locked' : ''} container`
         })
 
+        // Update menu
         activateButton(bX, x)
         activateButton(bY, !x)
-        activateButton(bA, a)
-        activateButton(bB, b)
         activateButton(bS, s)
-        activateButton(btl, d === 'tl')
-        activateButton(btr, d === 'tr')
-        activateButton(bbl, d === 'bl')
-        activateButton(bbr, d === 'br')
-        activateButton(br, d === 'r')
+        activateButton(bA, ab === 1)
+        activateButton(bB, ab === 2)
+        activateButton(b1, origin === 1)
+        activateButton(b3, origin === 3)
+        activateButton(b7, origin === 7)
+        activateButton(b9, origin === 9)
+        activateButton(b0, origin === 0)
         activateButtonLock(xLocked, true)
         activateButtonLock(yLocked, false)
-        divWrap.style.borderTopColor = d[0] === 't' ? 'GoldenRod' : 'SlateGray';
-        divWrap.style.borderRightColor = d[1] === 'r' ? 'GoldenRod' : 'SlateGray';
-        divWrap.style.borderBottomColor = d[0] === 'b' ? 'GoldenRod' : 'SlateGray';
-        divWrap.style.borderLeftColor = d[1] === 'l' ? 'GoldenRod' : 'SlateGray';
+        divWrap.style.borderTopColor = origin > 6 ? 'GoldenRod' : 'SlateGray'
+        divWrap.style.borderLeftColor = origin % 3 === 1 ? 'GoldenRod' : 'SlateGray'
+        divWrap.style.borderRightColor = origin === 3 || origin === 9 ? 'GoldenRod' : 'SlateGray'
+        divWrap.style.borderBottomColor = origin === 1 || origin === 3 ? 'GoldenRod' : 'SlateGray'
+        // Sliders are not controled
       }
 
-      const onclick = ((el, fn) => el.onclick = () => fn() + '' && render())
+      // Events mutate state and render
+      const onclick = ((el, fn) => el.onclick = () => [fn(), render()])
 
       onclick(bX, () => state.x = true)
       onclick(bY, () => state.x = false)
-      onclick(bA, () => (state.a = !state.a) + '' && (state.b = false))
-      onclick(bB, () => (state.b = !state.b) + '' && (state.a = false))
       onclick(bS, () => state.s = !state.s)
-      onclick(btl, () => state.d = state.d !== 'tl' && 'tl')
-      onclick(btr, () => state.d = state.d !== 'tr' && 'tr')
-      onclick(bbl, () => state.d = state.d !== 'bl' && 'bl')
-      onclick(bbr, () => state.d = state.d !== 'br' && 'br')
-      onclick(br, () => state.d = state.d !== 'r' && 'r')
+      onclick(bA, () => state.ab = state.ab === 1 ? 0 : 1)
+      onclick(bB, () => state.ab = state.ab === 2 ? 0 : 2)
+      onclick(b7, () => state.origin = state.origin !== 7 ? 7 : -1)
+      onclick(b9, () => state.origin = state.origin !== 9 ? 9 : -1)
+      onclick(b1, () => state.origin = state.origin !== 1 ? 1 : -1)
+      onclick(b3, () => state.origin = state.origin !== 3 ? 3 : -1)
+      onclick(b0, () => state.origin = state.origin !== 0 ? 0 : -1)
 
       onclick(bLock, () => {
         const i = (state.lockIndex + 1) % 4
@@ -318,9 +333,9 @@
         else (state.xLocked = false) || (state.yLocked = true)
 
         state.lockIndex = i
-        render()
       })
 
+      // Containers content has a separate render scope
       function renderBoxes() {
         const { n, grow } = state
 
@@ -329,21 +344,19 @@
         traverseSections(section => {
           const container = section.children[1]
 
-          while (container.hasChildNodes()) {
-            container.removeChild(container.lastChild)
-          }
+          while (container.hasChildNodes()) container.removeChild(container.lastChild)
 
           for (let i = 0; i < n; i++) {
             const box = document.createElement('div')
 
             box.innerText = i + 1
-            box.className = 'x5 box' + (grow ? ' grow' : '')
+            box.className = `x5 box${grow ? ' grow' : ''}`
             container.appendChild(box)
           }
         })
       }
 
-      bGrow.onclick = () => (state.grow = !state.grow) + '' && renderBoxes();
+      bGrow.onclick = () => [state.grow = !state.grow, renderBoxes()];
 
       function handleBoxNumberChange(e, key) {
         const x = e.target.value
