@@ -3,9 +3,9 @@ const path = require('path')
 
 const outputFile = path.join(__dirname, 'flexpad.css')
 
-const end = 'flex-end'
 const start = 'flex-start'
 const center = 'center'
+const end = 'flex-end'
 
 const isTop = i => i > 6
 const isMiddle = i => i > 3 && i < 7
@@ -15,18 +15,20 @@ const isCenter = i => i == 2 || i == 5 || i == 8
 const isRight = i => i == 3 || i == 6 || i == 9
 
 function decode(code) {
-  let _ = 0;
+  if (!(typeof code === 'string' && code.length > 1)) return null;
+
+  let _ = 0
 
   const x = code[0] === 'x'
-  const i = code[1];
+  const i = code[1]
   const j = parseInt(code[2])
 
-  if (j || j === 0) _++;
+  if (j || j === 0) _++
 
   const a = code[_ + 2] === 'a'
   const b = code[_ + 2] === 'b'
 
-  if (a || b) _++;
+  if (a || b) _++
 
   const s = code[_ + 2] === 's'
 
@@ -41,11 +43,11 @@ function decode(code) {
 
   if (isWest(i)) props.jc = start
   else if (isEast(i)) props.jc = end
-  else if (atGreenwitch(i)) props.jc = a ? 'space-around' : b ? 'space-between' :  center
+  else props.jc = a ? 'space-around' : b ? 'space-between' :  center
 
   if (isNorth(i)) props.ac = props.ai = start
   else if (isSouth(i)) props.ac = props.ai = end
-  else if (atEquator(i)) props.ac = props.ai = center
+  else props.ac = props.ai = center
 
   if (j) {
     props.d = `${x ? 'row' : 'column'}${isEast(j) ? '-reverse' : ''}`
@@ -110,7 +112,7 @@ class Flexpad {
   }
 
   toJs() {
-    const obj = {}
+    const obj = { display: 'flex' }
 
     propertyKeys.forEach(p => obj[jsConversion[p]] = this[p])
 
