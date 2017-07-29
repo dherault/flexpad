@@ -15,32 +15,49 @@
         font-family: sans-serif;
         font-size: 20px;
         min-height: 100vh;
+        text-align: center;
+        color: SlateGray;
       }
       h1 {
-        margin: 40px 0 40px 0;
+        margin: 40px 0 35px 0;
+        color: DarkGoldenRod;
+      }
+      a {
+        color: DarkGoldenRod;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      footer {
+        width: 370px;
+        margin: 35px 0 40px 0;
+        text-align: center;
       }
       nav {
-        width: 660px;
+        width: 745px;
       }
       article {
-        width: calc((44 * 4 + 40) * 3px);
+        max-width: 612px;
         margin-top: 20px;
+        flex-grow: 1;
       }
       section {
         display: block;
         margin: 5px 15px 0 15px;
       }
-      section > label {
+      label {
         display: block;
         width: 100%;
         font-size: 24px;
         font-weight: bold;
         font-family: monospace;
         text-align: center;
+        color: DarkGoldenRod;
       }
-      nav > label {
-        font-family: monospace;
-        text-align: center;
+      input {
+        min-width: 180px;
+        margin: 0 5px;
       }
       button {
         cursor: pointer;
@@ -48,29 +65,27 @@
         min-height: 50px;
         background-color: white;
         padding: 10px;
-        border: 2px solid DarkGrey;
+        border: 2px solid SlateGray;
         margin: 0px 5px;
         font-family: monospace;
-        color: DarkGrey;
+        color: SlateGray;
       }
       button:focus, input:focus {
         outline: none;
-      }
-      .button-active {
-        font-weight: bold;
-        background-color: DarkGrey;
-        color: black;
       }
       .buttons {
         padding: 0;
         width: 54px;
         max-width: 60px;
         min-height: : 60px;
-        border: 2px solid DarkGrey;
+        border: 2px solid SlateGray;
+      }
+      .buttons .button-active:nth-child(0) {
+        border-color:
       }
       .separator {
         width: 2px;
-        background-color: DarkGrey;
+        background-color: SlateGray;
         height: 46px;
         margin: 0 5px;
       }
@@ -86,23 +101,45 @@
       }
       .zero {
         margin-top: 5px;
-        border: 2px solid DarkGrey;
+        border: 2px solid SlateGray;
       }
-      .locked {
-        height: calc(4 * 43px);
+      .button-active {
+        font-weight: bold;
+        color: DarkGoldenRod;
+        border-color: DarkGoldenRod;
+      }
+      .lock {
+        border: none;
+      }
+      .lock-x {
+        border-top: 2px solid SlateGray;
+        border-bottom: 2px solid SlateGray;
+      }
+      .lock-y {
+        border-left: 2px solid SlateGray;
+        border-right: 2px solid SlateGray;
       }
       .container {
-        width: calc(4 * 43px);
-        border: 2px solid DarkGrey;
+        margin-top: 3px;
+        padding: 1px;
+        border: 2px solid DarkGoldenRod;
+      }
+      .y-locked {
+        height: 174px;
+      }
+      .x-locked {
+        width: 174px;
       }
       .box {
         min-width: 40px;
         min-height: 40px;
         margin: 1px;
-        border: 2px solid DarkGrey;
-        color: Darkgrey;
+        border: 2px solid SlateGray;
         font-size: 16px;
         font-weight: bold;
+      }
+      .grow {
+        flex-grow: 1;
       }
     </style>
 
@@ -116,32 +153,40 @@
     <nav class="x57b">
 
       <div class="x47">
-        <button class="button-active">x</button>
-        <button>y</button>
+        <button class="button-active" title="X axis">x</button>
+        <button title="Y axis">y</button>
         <div class="separator"></div>
-        <button>a</button>
-        <button>b</button>
+        <button title="spacing: around">a</button>
+        <button title="spacing: between">b</button>
         <div class="separator"></div>
-        <button>s</button>
+        <button title="stretch">s</button>
       </div>
 
       <div class="y8">
-        <div class="x57 buttons">
+        <div id="wrap-origin" class="x57 buttons" title="wrap origin">
           <button>⌜</button>
           <button>⌝</button>
           <button>⌞</button>
           <button>⌟</button>
         </div>
 
-        <button class="zero">0</button>
+        <button class="zero" title="nowrap reverse">0</button>
       </div>
 
-      <input type="range" min="1" max="20" value="3" />
-      <button>🔓</button>
+      <div class="x47">
+        <button class="lock" title="lock dimensions">🔒</button>
+        <button title="grow children">↹</button>
+      </div>
+
+
+      <div class="y8">
+        <input type="range" min="1" max="20" value="3" title="number of children"/>
+        <input type="range" min="1" max="5" value="4" title="children width" />
+      </div>
 
     </nav>
 
-    <article class="x57">
+    <article class="x87">
 
       <section id="7">
         <label></label>
@@ -182,9 +227,16 @@
 
     </article>
 
+    <footer class="x8b">
+      <a href="https://github.com/dherault/flexpad" target="_blank">Documentation</a>
+      <a href="https://raw.githubusercontent.com/dherault/flexpad/master/flexpad.css" target="_blank">CSS file</a>
+      <a href="https://github.com/dherault/flexpad/blob/master/LICENSE" target="_blank">MIT License</a>
+    </footer>
+
     <script>
-      const [bX, bY, bA, bB, bS, btl, btr, bbl, bbr, br, bl] = document.getElementsByTagName('button')
-      const [slider] = document.getElementsByTagName('input')
+      const [bX, bY, bA, bB, bS, btl, btr, bbl, bbr, br, bLock, bGrow] = document.getElementsByTagName('button')
+      const [sliderN, sliderR] = document.getElementsByTagName('input')
+      const divWrap = document.getElementById('wrap-origin');
 
       const sections = []
       for (let i = 1; i < 10; i++) sections.push(document.getElementById(i))
@@ -194,17 +246,25 @@
       }
 
       const activateButton = (el, bool) => el.classList[bool ? 'add' : 'remove']('button-active')
+      const activateButtonLock = (bool, x) => bLock.classList[bool ? 'add' : 'remove']('lock-' + (x ? 'x' : 'y'));
 
       const dToI = d => ({ tl: 7, tr: 9, bl: 1, br: 3, r: '0' })[d]
 
       const state = {
+        d: '',
         x: true,
         n: 3,
-        locked: true,
+        xLocked: true,
+        yLocked: true,
+        lockIndex: 0,
+        /*  y ȳ
+          x 0 1
+          x̄ 2 3
+        */
       }
 
       function render() {
-        const { x, a, b, s, d, locked } = state
+        const { x, a, b, s, d, grow, xLocked, yLocked } = state
 
         traverseSections((section, i) => {
           let className = `${x ? 'x' : 'y'}${i}${dToI(d) || ''}`
@@ -213,8 +273,8 @@
           if (b) className += 'b'
           if (s) className += 's'
 
-          section.children[0].innerText = '.' + className
-          section.children[1].className = `${className}${locked ? ' locked' : ''} container`
+          section.children[0].innerText = className
+          section.children[1].className = `${className}${xLocked ? ' x-locked' : ''}${yLocked ? ' y-locked' : ''} container`
         })
 
         activateButton(bX, x)
@@ -227,7 +287,12 @@
         activateButton(bbl, d === 'bl')
         activateButton(bbr, d === 'br')
         activateButton(br, d === 'r')
-        activateButton(bl, !locked)
+        activateButtonLock(xLocked, true)
+        activateButtonLock(yLocked, false)
+        divWrap.style.borderTopColor = d[0] === 't' ? 'DarkGoldenRod' : 'SlateGray';
+        divWrap.style.borderRightColor = d[1] === 'r' ? 'DarkGoldenRod' : 'SlateGray';
+        divWrap.style.borderBottomColor = d[0] === 'b' ? 'DarkGoldenRod' : 'SlateGray';
+        divWrap.style.borderLeftColor = d[1] === 'l' ? 'DarkGoldenRod' : 'SlateGray';
       }
 
       const onclick = ((el, fn) => el.onclick = () => fn() + '' && render())
@@ -242,10 +307,23 @@
       onclick(bbl, () => state.d = state.d !== 'bl' && 'bl')
       onclick(bbr, () => state.d = state.d !== 'br' && 'br')
       onclick(br, () => state.d = state.d !== 'r' && 'r')
-      onclick(bl, () => state.locked = !state.locked)
+
+      onclick(bLock, () => {
+        const i = (state.lockIndex + 1) % 4
+
+        if (i === 0) state.xLocked = state.yLocked = true
+        else if (i === 1) state.xLocked = state.yLocked = false
+        else if (i === 2) (state.xLocked = true) && (state.yLocked = false)
+        else (state.xLocked = false) || (state.yLocked = true)
+
+        state.lockIndex = i
+        render()
+      })
 
       function renderBoxes() {
-        const { n } = state
+        const { n, grow } = state
+
+        activateButton(bGrow, grow)
 
         traverseSections(section => {
           const container = section.children[1]
@@ -258,24 +336,27 @@
             const box = document.createElement('div')
 
             box.innerText = i + 1
-            box.className = 'x5 box'
+            box.className = 'x5 box' + (grow ? ' grow' : '')
             container.appendChild(box)
           }
         })
-      };
+      }
 
-      function handleBoxNumberChange(e) {
-        const n = e.target.value
+      bGrow.onclick = () => (state.grow = !state.grow) + '' && renderBoxes();
 
-        if (state.n === n) return
+      function handleBoxNumberChange(e, key) {
+        const x = e.target.value
 
-        state.n = n
+        if (state[key] === x) return
 
+        state[key] = x
         renderBoxes()
       }
 
-      slider.oninput = handleBoxNumberChange
-      slider.onchange = handleBoxNumberChange
+      sliderN.oninput = e => handleBoxNumberChange(e, 'n')
+      sliderN.onchange = e => handleBoxNumberChange(e, 'n')
+      sliderR.oninput = e => handleBoxNumberChange(e, 'r')
+      sliderR.onchange = e => handleBoxNumberChange(e, 'r')
 
       renderBoxes()
       render()
