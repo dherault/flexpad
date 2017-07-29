@@ -5,8 +5,8 @@
   "main": "flexpad.css",
   "scripts": {
     "start": "python -m SimpleHTTPServer",
-    "build": "node build.js",
-    "dev": "./node_modules/.bin/nodemon ./build.js --watch .",
+    "build": "node lib/build.js",
+    "dev": "./node_modules/.bin/nodemon ./lib/build.js --watch .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
