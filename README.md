@@ -4,22 +4,21 @@ Flexpad is a set of CSS classes to quickly make any flexbox layout using opinion
 
 ## How it works
 
-- Choose an axis for you container: x or y.
-- Think of a keypad:
 ```
-7 8 9
-4 5 6
-1 2 3
-  0
-```
-- Pick the number corresponding to the alignment you want for your content.
+- Choose an axis for your container: x or y
+- Think of a keypad:  7 8 9
+                      4 5 6
+                      1 2 3
+                        0
+- Pick the number corresponding to the alignment you want for your content
 - Assign the class to your container:
+```
 ```html
 <div class="x5">
   <div>All centered</div>
 </div>
 <div class="y9">
-  <div>Top right aligned column</div>
+  <div>Top right y aligned</div>
 </div>
 ```
 
@@ -42,7 +41,7 @@ import 'flexpad'
 
 - Use with inline styles:
 ```js
-import fp from 'flexpad'
+import fp from 'flexpad/lib'
 
 const Menu = () => (
   <div style={fp('x5b')}>
