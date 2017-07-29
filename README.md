@@ -26,20 +26,24 @@ Have a look at [the demo](https://dherault.github.io/flexpad/) for all the 360 v
 
 ## Usage
 
-Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpad/master/flexpad.css) or prefixed and minified.
+#### HTML
+
+Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpad/master/flexpad.css) or [minified](https://cdn.jsdelivr.net/gh/dherault/flexpad@0.0.1/flexpad.min.css).
 ```html
 <link rel="stylesheet" href="/flexpad.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dherault/flexpad@0.0.1/flexpad.min.css">
 ```
 
-Or use NPM package `npm i flexpad -S`
+#### JavaScript
 
-- inject CSS:
+`npm i flexpad -S`
+
+Inject CSS:
 ```js
 import 'flexpad'
 ```
 
-- Use with inline styles:
+Use with inline styles:
 ```js
 import fp from 'flexpad/lib'
 
@@ -50,6 +54,6 @@ const Menu = () => (
 )
 ```
 
-## License
+## Contributing
 
-MIT
+Yes ty.
