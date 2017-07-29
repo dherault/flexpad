@@ -183,11 +183,7 @@
         <button title="grow children">↹</button>
       </div>
 
-
-      <div class="y8">
-        <input type="range" min="1" max="20" value="3" title="number of children" />
-        <input type="range" min="1" max="5" value="4" title="children width" />
-      </div>
+      <input type="range" min="1" max="20" value="3" title="number of children" />
 
     </nav>
 
@@ -248,7 +244,7 @@
 
     <script>
       const [bX, bY, bA, bB, bS, b7, b9, b1, b3, b0, bLock, bGrow] = document.getElementsByTagName('button')
-      const [sliderN, sliderR] = document.getElementsByTagName('input')
+      const [sliderN] = document.getElementsByTagName('input')
       const divWrap = document.getElementById('items-origin')
 
       const sections = []
@@ -307,7 +303,7 @@
         divWrap.style.borderLeftColor = origin % 3 === 1 ? 'GoldenRod' : 'SlateGray'
         divWrap.style.borderRightColor = origin === 3 || origin === 9 ? 'GoldenRod' : 'SlateGray'
         divWrap.style.borderBottomColor = origin === 1 || origin === 3 ? 'GoldenRod' : 'SlateGray'
-        // Sliders are not controled
+        // The slider is not controled
       }
 
       // Events mutate state and render
@@ -358,19 +354,14 @@
 
       bGrow.onclick = () => [state.grow = !state.grow, renderBoxes()];
 
-      function handleBoxNumberChange(e, key) {
-        const x = e.target.value
+      sliderN.oninput = e => {
+        const n = e.target.value
 
-        if (state[key] === x) return
+        if (state.n === n) return
 
-        state[key] = x
+        state.n = n
         renderBoxes()
       }
-
-      sliderN.oninput = e => handleBoxNumberChange(e, 'n')
-      sliderN.onchange = e => handleBoxNumberChange(e, 'n')
-      sliderR.oninput = e => handleBoxNumberChange(e, 'r')
-      sliderR.onchange = e => handleBoxNumberChange(e, 'r')
 
       renderBoxes()
       render()
