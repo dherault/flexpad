@@ -278,8 +278,10 @@
         traverseSections((section, i) => {
           let className = `${x ? 'x' : 'y'}${i}${origin >= 0 ? origin : ''}`
 
-          if (ab === 1) className += 'a'
-          else if (ab === 2) className += 'b'
+          if (ab && (x ? i % 3 === 2 : i > 3 && i < 7)) {
+            if (ab === 1) className += 'a'
+            else if (ab === 2) className += 'b'
+          }
           if (s) className += 's'
 
           section.children[0].innerText = className
