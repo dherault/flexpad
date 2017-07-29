@@ -88,7 +88,7 @@ const jsConversion = {
 
 const propertyKeys = Object.keys(cssConversion)
 
-class Flexboard {
+class Flexpad {
 
   constructor(code) {
     Object.assign(this, {
@@ -125,7 +125,7 @@ for (let i = 1; i < 10; i++) {
     [0, 1, 3, 7, 9, ''].forEach(j =>
       ['a', 'b', ''].forEach(ab =>
         ['s', ''].forEach(s =>
-          css += new Flexboard(d + i + j + ab + s).toCss()
+          css += new Flexpad(d + i + j + ab + s).toCss()
         )
       )
     )
