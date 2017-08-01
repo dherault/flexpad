@@ -28,10 +28,10 @@ Have a look at [the demo](https://dherault.github.io/flexpad/) for all the 360 v
 
 #### HTML
 
-Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpad/master/flexpad.css) or [minified](https://cdn.jsdelivr.net/gh/dherault/flexpad@0.0.1/flexpad.min.css).
+Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpad/master/flexpad.css) or [prefixed and minified](https://cdn.jsdelivr.net/npm/flexpad@0.0.2/flexpad.min.css).
 ```html
 <link rel="stylesheet" href="/flexpad.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dherault/flexpad@0.0.1/flexpad.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flexpad@0.0.2/flexpad.min.css">
 ```
 
 #### JavaScript
