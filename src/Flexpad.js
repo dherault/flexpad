@@ -1,3 +1,8 @@
+/* ------------------------------------------------------------------- */
+/* Main class: converts a class string to corresponding CSS properties */
+/* can output the result as a CSS string or an inline-style JS object  */
+/* ------------------------------------------------------------------- */
+
 const start = 'flex-start'
 const center = 'center'
 const end = 'flex-end'

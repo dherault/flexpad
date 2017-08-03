@@ -1,3 +1,7 @@
+/* ----------------------------------------------------- */
+/* Main script: outputs the basic and minified css files */
+/* ----------------------------------------------------- */
+
 const fs = require('fs')
 const path = require('path')
 const csso = require('csso')
@@ -29,11 +33,11 @@ postcss([autoprefixer]).process(css).then(result => {
 
     const prefixedCss = result.css
 
-    fs.writeFileSync(path.join(__dirname, '../flexpad.css'), prefixedCss)
+    fs.writeFileSync(path.join(__dirname, '../dist/flexpad.css'), prefixedCss)
 
     const compressedCss = csso.minify(result.css).css
 
-    fs.writeFileSync(path.join(__dirname, '../flexpad.min.css'), compressedCss)
+    fs.writeFileSync(path.join(__dirname, '../dist/flexpad.min.css'), compressedCss)
 
     console.log(`Done - ${c} classes`)
 })
