@@ -1,6 +1,6 @@
 {
   "name": "flexpad",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A flexbox system",
   "main": "dist/bundle.js",
   "author": "David Hérault <dherault@gmail.com> (https://github.com/dherault)",
@@ -16,7 +16,6 @@
     "build-css": "node src/build.js",
     "build-js": "./node_modules/.bin/webpack",
     "build-demo": "DEMO=true ./node_modules/.bin/webpack",
-    "dev": "./node_modules/.bin/nodemon ./lib/build.js --watch .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

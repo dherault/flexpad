@@ -9,7 +9,6 @@ Flexpad is a set of CSS classes to quickly make any flexbox layout using opinion
 - Think of a keypad:  7 8 9
                       4 5 6
                       1 2 3
-                        0
 - Pick the number corresponding to the alignment you want for your content
 - Assign the class to your container:
 ```
@@ -28,10 +27,11 @@ Have a look at [the demo](https://dherault.github.io/flexpad/) for all the 360 v
 
 #### HTML
 
-Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpad/master/flexpad.css) or [prefixed and minified](https://cdn.jsdelivr.net/npm/flexpad@0.0.2/flexpad.min.css).
+Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpad/master/dist/flexpad.css) or [prefixed and minified](https://raw.githubusercontent.com/dherault/flexpad/master/dist/flexpad.min.css).
+
+Use a CDN:
 ```html
-<link rel="stylesheet" href="/flexpad.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flexpad@0.0.2/flexpad.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flexpad@0.1.0/flexpad.min.css">
 ```
 
 #### JavaScript
@@ -40,12 +40,12 @@ Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpa
 
 Inject CSS:
 ```js
-import 'flexpad'
+import 'flexpad/dist/flexpad.min.css'
 ```
 
 Use with inline styles:
 ```js
-import fp from 'flexpad/lib'
+import fp from 'flexpad'
 
 const Menu = () => (
   <div style={fp('x5b')}>
@@ -56,4 +56,4 @@ const Menu = () => (
 
 ## Contributing
 
-Yes ty.
+Yes thank you.
