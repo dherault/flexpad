@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: isDemo ? 'demo-bundle.js' : 'bundle.js',
     path: path.resolve(__dirname, './dist'),
+    libraryTarget: isDemo ? 'var' : 'umd',
   },
   module: {
     rules: [
