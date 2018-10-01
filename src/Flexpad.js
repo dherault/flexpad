@@ -27,8 +27,9 @@ function decode(code) {
 
   const a = code[_ + 2] === 'a'
   const b = code[_ + 2] === 'b'
+  const e = code[_ + 2] === 'e'
 
-  if (a || b) _++
+  if (a || b || e) _++
 
   const s = code[_ + 2] === 's'
 
@@ -43,7 +44,7 @@ function decode(code) {
 
   if (isWest(i)) props.jc = start
   else if (isEast(i)) props.jc = end
-  else props.jc = a ? 'space-around' : b ? 'space-between' :  center
+  else props.jc = a ? 'space-around' : b ? 'space-between' : e ? 'space-evenly' : center
 
   if (isNorth(i)) props.ac = props.ai = start
   else if (isSouth(i)) props.ac = props.ai = end

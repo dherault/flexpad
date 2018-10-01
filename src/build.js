@@ -15,13 +15,13 @@ let css = ''
 for (let i = 1; i < 10; i++) {
   ['x', 'y'].forEach(d =>
     ['', 0, 1, 3, 7, 9].forEach(j =>
-      ['', 'a', 'b'].forEach(ab =>
+      ['', 'a', 'b', 'e'].forEach(abe =>
         ['', 's'].forEach(s => {
-          // Limit non relevant a/b classes
-          if (ab && !(d === 'x' ? i % 3 === 2 : i > 3 && i < 7)) return
+          // Limit non relevant a/b/e classes
+          if (abe && !(d === 'x' ? i % 3 === 2 : i > 3 && i < 7)) return
 
           c++
-          css += new Flexpad(d + i + j + ab + s).toCss()
+          css += new Flexpad(d + i + j + abe + s).toCss()
         })
       )
     )

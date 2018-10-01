@@ -21,7 +21,7 @@ Flexpad is a set of CSS classes to quickly make any flexbox layout using opinion
 </div>
 ```
 
-Have a look at [the demo](https://dherault.github.io/flexpad/) for all the 360 variations.
+Have a look at [the demo](https://dherault.github.io/flexpad/) for all the 432 variations.
 
 ## Usage
 

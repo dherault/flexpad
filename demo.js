@@ -1,4 +1,4 @@
-const [bX, bY, bA, bB, bS, b7, b9, b1, b3, b0, bLock, bGrow] = document.getElementsByTagName('button')
+const [bX, bY, bA, bB, bE, bS, b7, b9, b1, b3, b0, bLock, bGrow] = document.getElementsByTagName('button')
 const [sliderN] = document.getElementsByTagName('input')
 const divWrap = document.getElementById('wrap-origin')
 
@@ -27,15 +27,16 @@ const state = {
 
 function render() {
   // Ui as pure function of state
-  const { x, ab, s, origin, xLocked, yLocked } = state
+  const { x, abe, s, origin, xLocked, yLocked } = state
 
   // Assign selected classname to containers
   traverseSections((section, i) => {
     let className = `${x ? 'x' : 'y'}${i}${origin >= 0 ? origin : ''}`
 
-    if (ab && (x ? i % 3 === 2 : i > 3 && i < 7)) {
-      if (ab === 1) className += 'a'
-      else if (ab === 2) className += 'b'
+    if (abe && (x ? i % 3 === 2 : i > 3 && i < 7)) {
+      if (abe === 1) className += 'a'
+      else if (abe === 2) className += 'b'
+      else if (abe === 3) className += 'e'
     }
     if (s) className += 's'
 
@@ -47,8 +48,9 @@ function render() {
   activateButton(bX, x)
   activateButton(bY, !x)
   activateButton(bS, s)
-  activateButton(bA, ab === 1)
-  activateButton(bB, ab === 2)
+  activateButton(bA, abe === 1)
+  activateButton(bB, abe === 2)
+  activateButton(bE, abe === 3)
   activateButton(b1, origin === 1)
   activateButton(b3, origin === 3)
   activateButton(b7, origin === 7)
@@ -69,8 +71,9 @@ const onclick = ((el, fn) => el.onclick = () => [fn(), render()])
 onclick(bX, () => state.x = true)
 onclick(bY, () => state.x = false)
 onclick(bS, () => state.s = !state.s)
-onclick(bA, () => state.ab = state.ab === 1 ? 0 : 1)
-onclick(bB, () => state.ab = state.ab === 2 ? 0 : 2)
+onclick(bA, () => state.abe = state.abe === 1 ? 0 : 1)
+onclick(bB, () => state.abe = state.abe === 2 ? 0 : 2)
+onclick(bE, () => state.abe = state.abe === 3 ? 0 : 3)
 onclick(b7, () => state.origin = state.origin !== 7 ? 7 : -1)
 onclick(b9, () => state.origin = state.origin !== 9 ? 9 : -1)
 onclick(b1, () => state.origin = state.origin !== 1 ? 1 : -1)

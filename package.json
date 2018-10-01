@@ -1,6 +1,6 @@
 {
   "name": "flexpad",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A flexbox system",
   "main": "dist/bundle.js",
   "author": "David Hérault <dherault@gmail.com> (https://github.com/dherault)",
@@ -26,6 +26,7 @@
     "csso": "^3.5.1",
     "nodemon": "^1.18.3",
     "postcss": "^7.0.2",
-    "webpack": "^4.16.5"
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.2"
   }
 }
