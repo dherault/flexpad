@@ -3,6 +3,7 @@ const path = require('path');
 const isDemo = process.env.DEMO;
 
 module.exports = {
+  mode: 'production',
   entry: isDemo ? './demo.js' : './src/index.js',
   output: {
     filename: isDemo ? 'demo-bundle.js' : 'bundle.js',
