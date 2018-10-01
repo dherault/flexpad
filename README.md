@@ -36,7 +36,7 @@ Use a CDN:
 
 #### JavaScript
 
-`npm i flexpad -S`
+`npm install flexpad --save`
 
 Inject CSS:
 ```js
