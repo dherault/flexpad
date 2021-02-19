@@ -7,9 +7,9 @@ const start = 'flex-start'
 const center = 'center'
 const end = 'flex-end'
 
-const isTop = i => i > 6
+const isTop = i => i < 4
 const isMiddle = i => i > 3 && i < 7
-const isBottom = i => i < 4
+const isBottom = i => i > 6
 const isLeft = i => i == 1 || i == 4 || i == 7
 const isCenter = i => i == 2 || i == 5 || i == 8
 const isRight = i => i == 3 || i == 6 || i == 9

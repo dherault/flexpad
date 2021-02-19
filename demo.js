@@ -1,4 +1,4 @@
-const [bX, bY, bA, bB, bE, bS, b7, b9, b1, b3, b0, bLock, bGrow] = document.getElementsByTagName('button')
+const [bX, bY, bA, bB, bE, bS, b1, b3, b7, b9, b0, bLock, bGrow] = document.getElementsByTagName('button')
 const [sliderN] = document.getElementsByTagName('input')
 const divWrap = document.getElementById('wrap-origin')
 
@@ -58,10 +58,10 @@ function render() {
   activateButton(b0, origin === 0)
   activateButtonLock(xLocked, true)
   activateButtonLock(yLocked, false)
-  divWrap.style.borderTopColor = origin > 6 ? 'GoldenRod' : 'SlateGray'
+  divWrap.style.borderTopColor = origin === 1 || origin === 3 ? 'GoldenRod' : 'SlateGray'
   divWrap.style.borderLeftColor = origin % 3 === 1 ? 'GoldenRod' : 'SlateGray'
   divWrap.style.borderRightColor = origin === 3 || origin === 9 ? 'GoldenRod' : 'SlateGray'
-  divWrap.style.borderBottomColor = origin === 1 || origin === 3 ? 'GoldenRod' : 'SlateGray'
+  divWrap.style.borderBottomColor = origin > 6 ? 'GoldenRod' : 'SlateGray'
   // The slider is not controled
 }
 
