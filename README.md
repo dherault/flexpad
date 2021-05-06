@@ -21,18 +21,9 @@ Flexpad is a set of CSS classes to quickly make any flexbox layout using opinion
 </div>
 ```
 
-Have a look at [the demo](https://dherault.github.io/flexpad/) for all the 432 variations.
+Have a look at [the demo](https://dherault.github.io/flexpad/) for all the 348 variations.
 
 ## Usage
-
-#### HTML
-
-Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpad/master/dist/flexpad.css) or [prefixed and minified](https://raw.githubusercontent.com/dherault/flexpad/master/dist/flexpad.min.css).
-
-Use a CDN:
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flexpad@2.0.0/dist/flexpad.min.css">
-```
 
 #### JavaScript
 
@@ -40,6 +31,8 @@ Use a CDN:
 
 Inject CSS:
 ```js
+import 'flexpad/dist/flexpad.css'
+// or, prefixed and minified
 import 'flexpad/dist/flexpad.min.css'
 ```
 
@@ -54,6 +47,15 @@ const Menu = () => (
 )
 ```
 
+#### HTML
+
+Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpad/master/dist/flexpad.css) or [prefixed and minified](https://raw.githubusercontent.com/dherault/flexpad/master/dist/flexpad.min.css).
+
+Use a CDN:
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flexpad@3.0.0/dist/flexpad.min.css">
+```
+
 ## Contributing
 
-Yes thank you.
+Yes, thank you.

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
     <!--  For local development  -->
     <link rel="stylesheet" href="/dist/flexpad.css">
@@ -20,6 +20,7 @@
         font-family: sans-serif;
         font-size: 20px;
         color: SlateGray;
+        padding: 2rem;
       }
       h1 {
         margin: 40px 0 35px 0;
@@ -70,7 +71,7 @@
         background-color: white;
         padding: 10px;
         border: 2px solid SlateGray;
-        margin: 0px 5px;
+        margin: 0px 0.25rem;
         font-family: monospace;
         color: SlateGray;
       }
@@ -79,7 +80,6 @@
       }
       .buttons {
         padding: 0;
-        width: 54px;
         max-width: 60px;
         min-height: 60px;
         border: 2px solid SlateGray;
@@ -101,7 +101,7 @@
         font-size: 16px;
       }
       .zero {
-        margin-top: 5px;
+        margin-top: 0.5rem;
         border: 2px solid SlateGray;
       }
       .button-active {
@@ -141,8 +141,17 @@
         background-color: white;
         cursor: default;
       }
+      .box-baseline:nth-child(2) {
+        font-size: 20px;
+      }
+      .box-baseline:nth-child(3) {
+        font-size: 24px;
+      }
       .grow {
         flex-grow: 1;
+      }
+      .ml {
+        margin-left: 1rem;
       }
     </style>
 
@@ -153,20 +162,23 @@
 
     <h1>Flexpad</h1>
 
-    <nav class="x57b">
+    <nav class="x51b">
 
-      <div class="x47">
+      <div class="x41">
         <button class="button-active" title="X axis">x</button>
         <button title="Y axis">y</button>
         <div class="separator"></div>
-        <button title="spacing: around">a</button>
-        <button title="spacing: between">b</button>
-        <button title="spacing: evenly">e</button>
+        <button title="space-around">a</button>
+        <button title="space-between">b</button>
+        <button title="space-evenly">e</button>
         <div class="separator"></div>
         <button title="stretch">s</button>
+        <button title="baseline">z</button>
+        <button title="first baseline">f</button>
+        <button title="last baseline">l</button>
       </div>
 
-      <div class="y8">
+      <div class="y8 ml">
         <div id="wrap-origin" class="x51 buttons" title="wrap origin">
           <button>⌜</button>
           <button>⌝</button>
@@ -177,12 +189,12 @@
         <button class="zero" title="nowrap reverse">0</button>
       </div>
 
-      <div class="x47">
+      <div class="x41 ml">
         <button class="lock" title="lock dimensions">🔒</button>
         <button title="grow children">↹</button>
       </div>
 
-      <input type="range" min="1" max="20" value="3" title="number of children" />
+      <input type="range" min="1" max="20" value="3" title="number of children" class="ml" />
 
     </nav>
 

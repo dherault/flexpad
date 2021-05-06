@@ -32,6 +32,9 @@ function decode(code) {
   if (a || b || e) _++
 
   const s = code[_ + 2] === 's'
+  const z = code[_ + 2] === 'z'
+  const f = code[_ + 2] === 'f'
+  const l = code[_ + 2] === 'l'
 
   const isNorth = x ? isTop : isLeft
   const atEquator = x ? isMiddle : isCenter
@@ -69,8 +72,19 @@ function decode(code) {
   }
 
   if (s) props.ai = 'stretch'
+  if (z) props.ai = 'baseline'
+  if (f) props.ai = 'first baseline'
+  if (l) props.ai = 'last baseline'
 
   return props
+}
+
+const defaults = {
+  d: 'row',
+  w: 'nowrap',
+  jc: 'flex-start',
+  ai: 'stretch',
+  ac: 'stretch',
 }
 
 const cssConversion = {
@@ -107,7 +121,9 @@ class Flexpad {
   toCss() {
     let css = ''
 
-    propertyKeys.forEach(p => css += `  ${cssConversion[p]}: ${this[p]};\n`)
+    propertyKeys
+    .filter(p => defaults[p] !== this[p])
+    .forEach(p => css += `  ${cssConversion[p]}: ${this[p]};\n`)
 
     return `.${this.code} {\n  display: flex;\n${css}}\n`
   }
