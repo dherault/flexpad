@@ -6,8 +6,6 @@ const fs = require('fs')
 const path = require('path')
 
 const csso = require('csso')
-const postcss = require('postcss')
-const autoprefixer = require('autoprefixer')
 
 const Flexpad = require('./Flexpad')
 
@@ -52,16 +50,8 @@ for (let i = 1; i < 10; i++) {
   )
 }
 
-postcss([autoprefixer]).process(css).then(result => {
-  result.warnings().forEach(warn => console.warn(warn.toString()))
+fs.writeFileSync(path.join(__dirname, '../dist/flexpad.css'), css)
 
-  const prefixedCss = result.css
+;({ css } = csso.minify(css))
 
-  fs.writeFileSync(path.join(__dirname, '../dist/flexpad.css'), prefixedCss)
-
-  const compressedCss = csso.minify(result.css).css
-
-  fs.writeFileSync(path.join(__dirname, '../dist/flexpad.min.css'), compressedCss)
-
-  console.log(`Done - ${c} classes`)
-})
+fs.writeFileSync(path.join(__dirname, '../dist/flexpad.min.css'), css)
