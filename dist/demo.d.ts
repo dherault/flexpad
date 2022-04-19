@@ -1,0 +1,35 @@
+declare function render(): void;
+declare function renderBoxes(): void;
+declare const bX: any;
+declare const bY: any;
+declare const bA: any;
+declare const bB: any;
+declare const bE: any;
+declare const bS: any;
+declare const bZ: any;
+declare const bF: any;
+declare const bL: any;
+declare const b1: any;
+declare const b3: any;
+declare const b7: any;
+declare const b9: any;
+declare const b0: any;
+declare const bLock: any;
+declare const bGrow: any;
+declare const sliderN: any;
+declare const divWrap: HTMLElement;
+declare const sections: any[];
+declare function traverseSections(fn: any): void;
+declare function activateButton(el: any, bool: any): any;
+declare function activateButtonLock(bool: any, x: any): any;
+declare namespace state {
+    const n: number;
+    const x: boolean;
+    const abe: number;
+    const s: number;
+    const origin: number;
+    const xLocked: boolean;
+    const yLocked: boolean;
+    const lockIndex: number;
+}
+declare function onclick(el: any, fn: any): () => any[];

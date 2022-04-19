@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const [bX, bY, bA, bB, bE, bS, bZ, bF, bL, b1, b3, b7, b9, b0, bLock, bGrow] = document.getElementsByTagName('button')
 const [sliderN] = document.getElementsByTagName('input')
 const divWrap = document.getElementById('wrap-origin')
@@ -10,7 +11,7 @@ const traverseSections = fn => {
 }
 
 const activateButton = (el, bool) => el.classList[bool ? 'add' : 'remove']('button-active')
-const activateButtonLock = (bool, x) => bLock.classList[bool ? 'add' : 'remove']('lock-' + (x ? 'x' : 'y'))
+const activateButtonLock = (bool, x) => bLock.classList[bool ? 'add' : 'remove'](`lock-${x ? 'x' : 'y'}`)
 
 const state = {
   n: 3,

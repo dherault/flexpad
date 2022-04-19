@@ -53,7 +53,7 @@ Download the CSS file: [basic](https://raw.githubusercontent.com/dherault/flexpa
 
 Use a CDN:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flexpad@3.0.0/dist/flexpad.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flexpad@3.1.0/dist/flexpad.min.css">
 ```
 
 ## Contributing

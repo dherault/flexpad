@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
 /* ----------------------------------------------------- */
 /* Main script: outputs the basic and minified css files */
 /* ----------------------------------------------------- */
 
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
-const csso = require('csso')
+import csso from 'csso'
 
-const Flexpad = require('./Flexpad')
+import Flexpad from './Flexpad'
 
 let c = 0
 let css = `.flex-grow {
@@ -55,3 +56,5 @@ fs.writeFileSync(path.join(__dirname, '../dist/flexpad.css'), css)
 ;({ css } = csso.minify(css))
 
 fs.writeFileSync(path.join(__dirname, '../dist/flexpad.min.css'), css)
+
+console.log(c, 'combinaisons')

@@ -1,8 +1,12 @@
 {
   "name": "flexpad",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A CSS flexbox system",
-  "main": "dist/bundle.js",
+  "main": "dist/src/index.js",
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
   "author": "David Hérault <dherault@gmail.com> (https://github.com/dherault)",
   "license": "MIT",
   "repository": {
@@ -23,24 +27,29 @@
     "extends": "dherault"
   },
   "scripts": {
-    "start": "python -m SimpleHTTPServer",
+    "start": "npx serve",
     "start:watch": "npm start",
     "dev": "nodemon --exec npm run build --watch src --watch demo.js --watch index.html",
-    "build": "npm run build-css && npm run build-js && npm run build-demo",
-    "build-css": "node src/build.js",
-    "build-js": "./node_modules/.bin/webpack",
-    "build-demo": "DEMO=true ./node_modules/.bin/webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "build": "npm run build:module && npm run build:css",
+    "build:css": "ts-node -O '{\"module\":\"commonjs\"}' src/build.ts",
+    "build:module": "npx tsc --declaration",
+    "lint": "eslint demo.js src",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.0",
-    "@babel/preset-env": "^7.14.1",
-    "babel-loader": "^8.2.2",
+    "@babel/core": "^7.17.9",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@types/csso": "^5.0.0",
+    "@types/node": "^17.0.25",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
     "csso": "^4.2.0",
-    "eslint": "^7.25.0",
-    "eslint-config-dherault": "^1.6.0",
-    "nodemon": "^2.0.7",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.1"
+    "eslint-config-dherault": "^1.7.3",
+    "nodemon": "^2.0.15",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
   }
 }

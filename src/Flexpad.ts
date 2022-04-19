@@ -3,18 +3,35 @@
 /* can output the result as a CSS string or an inline-style JS object  */
 /* ------------------------------------------------------------------- */
 
+type FlexpadInnerProps = {
+  jc?: string
+  ac?: string
+  ai?: string
+  d?: string
+  w?: string
+}
+
+type FlexpadOutput = {
+  display?: string
+  flexDirection?: string
+  flexWrap?: string
+  justifyContent?: string
+  alignContent?: string
+  alignItems?: string
+}
+
 const start = 'flex-start'
 const center = 'center'
 const end = 'flex-end'
 
-const isTop = i => i < 4
-const isMiddle = i => i > 3 && i < 7
-const isBottom = i => i > 6
-const isLeft = i => i == 1 || i == 4 || i == 7
-const isCenter = i => i == 2 || i == 5 || i == 8
-const isRight = i => i == 3 || i == 6 || i == 9
+const isTop = (i: string | number) => i < 4
+const isMiddle = (i: string | number) => i > 3 && i < 7
+const isBottom = (i: string | number) => i > 6
+const isLeft = (i: string | number) => i == 1 || i == 4 || i == 7
+const isCenter = (i: string | number) => i == 2 || i == 5 || i == 8
+const isRight = (i: string | number) => i == 3 || i == 6 || i == 9
 
-function decode(code) {
+function decode(code: string) {
   if (!(typeof code === 'string' && code.length > 1)) return null
 
   let _ = 0
@@ -43,7 +60,7 @@ function decode(code) {
   const atGreenwitch = x ? isCenter : isMiddle
   const isEast = x ? isRight : isBottom
 
-  const props = {}
+  const props = {} as FlexpadInnerProps
 
   if (isWest(i)) props.jc = start
   else if (isEast(i)) props.jc = end
@@ -107,7 +124,9 @@ const propertyKeys = Object.keys(cssConversion)
 
 class Flexpad {
 
-  constructor(code) {
+  code: string
+
+  constructor(code: string) {
     Object.assign(this, {
       code,
       d: 'row',
@@ -129,7 +148,7 @@ class Flexpad {
   }
 
   toJs() {
-    const obj = { display: 'flex' }
+    const obj: FlexpadOutput = { display: 'flex' }
 
     propertyKeys.forEach(p => obj[jsConversion[p]] = this[p])
 
@@ -137,4 +156,4 @@ class Flexpad {
   }
 }
 
-module.exports = Flexpad
+export default Flexpad
