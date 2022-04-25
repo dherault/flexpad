@@ -36,7 +36,7 @@ function decode(code: string) {
   const i = code[1]
   const j = parseInt(code[2])
 
-  if (typeof j === 'number') _++
+  if (j || j === 0) _++
 
   const a = code[_ + 2] === 'a'
   const b = code[_ + 2] === 'b'

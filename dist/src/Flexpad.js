@@ -2,9 +2,6 @@
 /* Main class: converts a class string to corresponding CSS properties */
 /* can output the result as a CSS string or an inline-style JS object  */
 /* ------------------------------------------------------------------- */
-const start = 'flex-start';
-const center = 'center';
-const end = 'flex-end';
 const isTop = (i) => i < 4;
 const isMiddle = (i) => i > 3 && i < 7;
 const isBottom = (i) => i > 6;
@@ -37,24 +34,24 @@ function decode(code) {
     const isEast = x ? isRight : isBottom;
     const props = {};
     if (isWest(i))
-        props.jc = start;
+        props.jc = 'flex-start';
     else if (isEast(i))
-        props.jc = end;
+        props.jc = 'flex-end';
     else
-        props.jc = a ? 'space-around' : b ? 'space-between' : e ? 'space-evenly' : center;
+        props.jc = a ? 'space-around' : b ? 'space-between' : e ? 'space-evenly' : 'center';
     if (isNorth(i))
-        props.ac = props.ai = start;
+        props.ac = props.ai = 'flex-start';
     else if (isSouth(i))
-        props.ac = props.ai = end;
+        props.ac = props.ai = 'flex-end';
     else
-        props.ac = props.ai = center;
+        props.ac = props.ai = 'center';
     if (j) {
         props.d = `${x ? 'row' : 'column'}${isEast(j) ? '-reverse' : ''}`;
         props.w = `wrap${isSouth(j) ? '-reverse' : ''}`;
         if (isEast(j) && !atGreenwitch(i))
-            props.jc = props.jc === end ? start : end;
+            props.jc = props.jc === 'flex-end' ? 'flex-start' : 'flex-end';
         if (isSouth(j) && !atEquator(i))
-            props.ac = props.ai = props.ai === end ? start : end;
+            props.ac = props.ai = props.ai === 'flex-end' ? 'flex-start' : 'flex-end';
     }
     else {
         props.d = x ? 'row' : 'column';
@@ -62,7 +59,7 @@ function decode(code) {
         if (j === 0) {
             props.d += '-reverse';
             if (!atGreenwitch(i))
-                props.jc = props.jc === end ? start : end;
+                props.jc = props.jc === 'flex-end' ? 'flex-start' : 'flex-end';
         }
     }
     if (s)
@@ -80,7 +77,7 @@ const defaults = {
     w: 'nowrap',
     jc: 'flex-start',
     ai: 'stretch',
-    ac: 'stretch',
+    ac: 'normal',
 };
 const cssConversion = {
     d: 'flex-direction',
@@ -99,14 +96,7 @@ const jsConversion = {
 const propertyKeys = Object.keys(cssConversion);
 class Flexpad {
     constructor(code) {
-        Object.assign(this, {
-            code,
-            d: 'row',
-            w: 'nowrap',
-            jc: start,
-            ai: start,
-            ac: center,
-        }, decode(code));
+        Object.assign(this, { code }, defaults, decode(code));
     }
     toCss() {
         let css = '';
@@ -117,7 +107,9 @@ class Flexpad {
     }
     toJs() {
         const obj = { display: 'flex' };
-        propertyKeys.forEach(p => obj[jsConversion[p]] = this[p]);
+        propertyKeys
+            .filter(p => defaults[p] !== this[p])
+            .forEach(p => obj[jsConversion[p]] = this[p]);
         return obj;
     }
 }
