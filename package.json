@@ -1,6 +1,6 @@
 {
   "name": "flexpad",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "A CSS flexbox system",
   "main": "dist/src/index.js",
   "files": [
@@ -23,9 +23,6 @@
     "grid",
     "layout"
   ],
-  "eslintConfig": {
-    "extends": "dherault"
-  },
   "scripts": {
     "start": "npx serve",
     "start:watch": "npm start",

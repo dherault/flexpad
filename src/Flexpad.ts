@@ -20,10 +20,6 @@ type FlexpadOutput = {
   alignItems?: string
 }
 
-const start = 'flex-start'
-const center = 'center'
-const end = 'flex-end'
-
 const isTop = (i: string | number) => i < 4
 const isMiddle = (i: string | number) => i > 3 && i < 7
 const isBottom = (i: string | number) => i > 6
@@ -40,7 +36,7 @@ function decode(code: string) {
   const i = code[1]
   const j = parseInt(code[2])
 
-  if (j || j === 0) _++
+  if (typeof j === 'number') _++
 
   const a = code[_ + 2] === 'a'
   const b = code[_ + 2] === 'b'
@@ -60,22 +56,22 @@ function decode(code: string) {
   const atGreenwitch = x ? isCenter : isMiddle
   const isEast = x ? isRight : isBottom
 
-  const props = {} as FlexpadInnerProps
+  const props: FlexpadInnerProps = {}
 
-  if (isWest(i)) props.jc = start
-  else if (isEast(i)) props.jc = end
-  else props.jc = a ? 'space-around' : b ? 'space-between' : e ? 'space-evenly' : center
+  if (isWest(i)) props.jc = 'flex-start'
+  else if (isEast(i)) props.jc = 'flex-end'
+  else props.jc = a ? 'space-around' : b ? 'space-between' : e ? 'space-evenly' : 'center'
 
-  if (isNorth(i)) props.ac = props.ai = start
-  else if (isSouth(i)) props.ac = props.ai = end
-  else props.ac = props.ai = center
+  if (isNorth(i)) props.ac = props.ai = 'flex-start'
+  else if (isSouth(i)) props.ac = props.ai = 'flex-end'
+  else props.ac = props.ai = 'center'
 
   if (j) {
     props.d = `${x ? 'row' : 'column'}${isEast(j) ? '-reverse' : ''}`
     props.w = `wrap${isSouth(j) ? '-reverse' : ''}`
 
-    if (isEast(j) && !atGreenwitch(i)) props.jc = props.jc === end ? start : end
-    if (isSouth(j) && !atEquator(i)) props.ac = props.ai = props.ai === end ? start : end
+    if (isEast(j) && !atGreenwitch(i)) props.jc = props.jc === 'flex-end' ? 'flex-start' : 'flex-end'
+    if (isSouth(j) && !atEquator(i)) props.ac = props.ai = props.ai === 'flex-end' ? 'flex-start' : 'flex-end'
   }
   else {
     props.d = x ? 'row' : 'column'
@@ -84,7 +80,7 @@ function decode(code: string) {
     if (j === 0) {
       props.d += '-reverse'
 
-      if (!atGreenwitch(i)) props.jc = props.jc === end ? start : end
+      if (!atGreenwitch(i)) props.jc = props.jc === 'flex-end' ? 'flex-start' : 'flex-end'
     }
   }
 
@@ -101,7 +97,7 @@ const defaults = {
   w: 'nowrap',
   jc: 'flex-start',
   ai: 'stretch',
-  ac: 'stretch',
+  ac: 'normal',
 }
 
 const cssConversion = {
@@ -127,14 +123,7 @@ class Flexpad {
   code: string
 
   constructor(code: string) {
-    Object.assign(this, {
-      code,
-      d: 'row',
-      w: 'nowrap',
-      jc: start,
-      ai: start,
-      ac: center,
-    }, decode(code))
+    Object.assign(this, { code }, defaults, decode(code))
   }
 
   toCss() {
@@ -150,7 +139,9 @@ class Flexpad {
   toJs() {
     const obj: FlexpadOutput = { display: 'flex' }
 
-    propertyKeys.forEach(p => obj[jsConversion[p]] = this[p])
+    propertyKeys
+    .filter(p => defaults[p] !== this[p])
+    .forEach(p => obj[jsConversion[p]] = this[p])
 
     return obj
   }
