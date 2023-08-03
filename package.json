@@ -4,8 +4,9 @@
   "description": "A CSS flexbox system",
   "main": "dist/src/index.js",
   "files": [
-    "dist/**/*",
-    "src/**/*"
+    "dist/src/**/*",
+    "dist/flexpad.css",
+    "dist/flexpad.min.css"
   ],
   "author": "David Hérault <dherault@gmail.com> (https://github.com/dherault)",
   "license": "MIT",

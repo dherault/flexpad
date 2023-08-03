@@ -1,0 +1,6 @@
+.eslintrc.js
+.vscode
+src
+index.html
+demo.js
+dist/demo*
