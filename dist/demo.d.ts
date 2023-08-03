@@ -23,13 +23,13 @@ declare function traverseSections(fn: any): void;
 declare function activateButton(el: any, bool: any): any;
 declare function activateButtonLock(bool: any, x: any): any;
 declare namespace state {
-    const n: number;
-    const x: boolean;
-    const abe: number;
-    const s: number;
-    const origin: number;
-    const xLocked: boolean;
-    const yLocked: boolean;
-    const lockIndex: number;
+    let n: number;
+    let x: boolean;
+    let abe: number;
+    let s: number;
+    let origin: number;
+    let xLocked: boolean;
+    let yLocked: boolean;
+    let lockIndex: number;
 }
 declare function onclick(el: any, fn: any): () => any[];

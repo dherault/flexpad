@@ -41,6 +41,7 @@ for (let i = 1; i < 10; i++) {
           if ((s === 'z' || s === 'f') && i > 3) return
           if (s === 'l' && i < 7) return
           if (d === 'y' && (s === 'z' || s === 'f' || s === 'l')) return
+          // @ts-expect-error
           if (j > 0 && s === 's') return
 
           c++

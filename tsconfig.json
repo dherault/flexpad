@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
     "allowJs": true,
     "target": "ES6",
     "module": "ESNext",
@@ -20,8 +19,7 @@
     "lib": [
       "ESNext",
       "DOM"
-    ],
-    "suppressImplicitAnyIndexErrors": true,
+    ]
   },
   "include": ["src/**/*", "demo.js"]
 }

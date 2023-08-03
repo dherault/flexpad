@@ -20,8 +20,11 @@ type FlexpadOutput = {
   alignItems?: string
 }
 
+// @ts-expect-error
 const isTop = (i: string | number) => i < 4
+// @ts-expect-error
 const isMiddle = (i: string | number) => i > 3 && i < 7
+// @ts-expect-error
 const isBottom = (i: string | number) => i > 6
 const isLeft = (i: string | number) => i == 1 || i == 4 || i == 7
 const isCenter = (i: string | number) => i == 2 || i == 5 || i == 8
@@ -130,7 +133,9 @@ class Flexpad {
     let css = ''
 
     propertyKeys
+    // @ts-expect-error
     .filter(p => defaults[p] !== this[p])
+    // @ts-expect-error
     .forEach(p => css += `  ${cssConversion[p]}: ${this[p]};\n`)
 
     return `.${this.code} {\n  display: flex;\n${css}}\n`
@@ -140,7 +145,9 @@ class Flexpad {
     const obj: FlexpadOutput = { display: 'flex' }
 
     propertyKeys
+    // @ts-expect-error
     .filter(p => defaults[p] !== this[p])
+    // @ts-expect-error
     .forEach(p => obj[jsConversion[p]] = this[p])
 
     return obj

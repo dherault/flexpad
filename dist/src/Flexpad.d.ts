@@ -1,4 +1,4 @@
-declare type FlexpadOutput = {
+type FlexpadOutput = {
     display?: string;
     flexDirection?: string;
     flexWrap?: string;

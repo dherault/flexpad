@@ -2,8 +2,11 @@
 /* Main class: converts a class string to corresponding CSS properties */
 /* can output the result as a CSS string or an inline-style JS object  */
 /* ------------------------------------------------------------------- */
+// @ts-expect-error
 const isTop = (i) => i < 4;
+// @ts-expect-error
 const isMiddle = (i) => i > 3 && i < 7;
+// @ts-expect-error
 const isBottom = (i) => i > 6;
 const isLeft = (i) => i == 1 || i == 4 || i == 7;
 const isCenter = (i) => i == 2 || i == 5 || i == 8;
@@ -101,14 +104,18 @@ class Flexpad {
     toCss() {
         let css = '';
         propertyKeys
+            // @ts-expect-error
             .filter(p => defaults[p] !== this[p])
+            // @ts-expect-error
             .forEach(p => css += `  ${cssConversion[p]}: ${this[p]};\n`);
         return `.${this.code} {\n  display: flex;\n${css}}\n`;
     }
     toJs() {
         const obj = { display: 'flex' };
         propertyKeys
+            // @ts-expect-error
             .filter(p => defaults[p] !== this[p])
+            // @ts-expect-error
             .forEach(p => obj[jsConversion[p]] = this[p]);
         return obj;
     }
